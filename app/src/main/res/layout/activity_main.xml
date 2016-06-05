@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:text="Registrieren"
         android:id="@+id/registerBtn"
+        android:layout_marginTop="48dp"
         android:layout_below="@+id/loginBtn"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/loginBtn" />
 </RelativeLayout>
