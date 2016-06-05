@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
+import io.sevenluck.client.chat2me.MainActivity;
 import io.sevenluck.client.chat2me.common.AndroidErrorResponseHandler;
 import io.sevenluck.client.chat2me.common.AppConstants;
 import io.sevenluck.client.chat2me.common.RestUtil;
@@ -39,9 +40,11 @@ public class RegisterAsyncTask extends AsyncTask<Member, Void, HttpResult<Member
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private Context context;
+    MainActivity.RegistrationCallback callback;
 
-    public RegisterAsyncTask(Context context) {
+    public RegisterAsyncTask(Context context, MainActivity.RegistrationCallback callback) {
         this.context = context.getApplicationContext();
+        this.callback = callback;
     }
 
 
@@ -55,7 +58,7 @@ public class RegisterAsyncTask extends AsyncTask<Member, Void, HttpResult<Member
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
-            HttpEntity<Member> request = new HttpEntity<Member>(member);
+            HttpEntity<Member> request = new HttpEntity<>(member);
 
             restTemplate.setErrorHandler(new AndroidErrorResponseHandler());
             ResponseEntity<String> response = restTemplate.exchange(REST_ENDPOINT, HttpMethod.POST, request, String.class);
@@ -84,17 +87,7 @@ public class RegisterAsyncTask extends AsyncTask<Member, Void, HttpResult<Member
 
     @Override
     protected void onPostExecute(HttpResult<Member> result) {
-        if (null == result) {
-            return;
-        }
-
-        if (result.isSuceeded()) {
-            Toast.makeText(context, "Registrierung erfolgreich.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(context, result.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-
+        callback.onFishedRequest(result);
     }
 
 }
