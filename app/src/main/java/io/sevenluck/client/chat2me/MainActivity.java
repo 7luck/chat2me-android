@@ -18,26 +18,28 @@ import io.sevenluck.client.chat2me.tasks.RegisterAsyncTask;
  */
 public class MainActivity extends AppCompatActivity {
 
-
-    private EditText nicknameTb;
-    private EditText passwordTb;
+    private EditText    nicknameTb;
+    private EditText    passwordTb;
+    private Button      loginBtn;
+    private Button      registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button loginBtn = (Button) findViewById(R.id.loginBtn);
+        loginBtn    = (Button) findViewById(R.id.loginBtn);
+        registerBtn = (Button) findViewById(R.id.registerBtn);
+        nicknameTb  = (EditText) findViewById(R.id.nicknameText);
+        passwordTb  = (EditText) findViewById(R.id.passwordEdit);
 
-        nicknameTb = (EditText) findViewById(R.id.nicknameText);
-        passwordTb = (EditText) findViewById(R.id.passwordEdit);
 
-        Button registerBtn = (Button) findViewById(R.id.registerBtn);
+
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RegisterAsyncTask regTask = new RegisterAsyncTask(MainActivity.this, new RegistrationCallback());
-
+                registerBtn.setEnabled(false);
                 Member member = new Member();
                 member.setNickname(nicknameTb.getText().toString());
                 member.setPassword(passwordTb.getText().toString());
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     public class RegistrationCallback {
 
         public void onFishedRequest(HttpResult<Member> result) {
+            registerBtn.setEnabled(true);
+
             if (null == result) {
                 return;
             }
