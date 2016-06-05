@@ -11,6 +11,7 @@ import android.widget.Toast;
 import io.sevenluck.client.chat2me.domain.HttpResult;
 import io.sevenluck.client.chat2me.domain.Member;
 import io.sevenluck.client.chat2me.tasks.RegisterAsyncTask;
+import io.sevenluck.client.chat2me.tasks.callbacks.HttpRequestCallback;
 
 
 /**
@@ -49,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class RegistrationCallback {
+    public class RegistrationCallback extends HttpRequestCallback<HttpResult<Member>> {
 
+        @Override
         public void onFishedRequest(HttpResult<Member> result) {
             registerBtn.setEnabled(true);
 
