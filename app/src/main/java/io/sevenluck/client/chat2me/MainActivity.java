@@ -39,19 +39,13 @@ public class MainActivity extends AppCompatActivity {
         passwordTb  = (EditText) findViewById(R.id.passwordEdit);
         dialog      = new ProgressDialog(this);
 
-
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginAsyncTask loginTask = new LoginAsyncTask(MainActivity.this, new LoginCallback());
                 loginBtn.setEnabled(false);
-
                 showDialog();
-
-                Member member = new Member();
-                member.setNickname(nicknameTb.getText().toString());
-                member.setPassword(passwordTb.getText().toString());
-                loginTask.execute(member);
+                loginTask.execute(getMember());
             }
         });
 
@@ -60,22 +54,31 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 RegisterAsyncTask registrationTask = new RegisterAsyncTask(MainActivity.this, new RegistrationCallback());
                 registerBtn.setEnabled(false);
-
                 showDialog();
-
-                Member member = new Member();
-                member.setNickname(nicknameTb.getText().toString());
-                member.setPassword(passwordTb.getText().toString());
-                registrationTask.execute(member);
+                registrationTask.execute(getMember());
             }
         });
 
+    }
+
+    private Member getMember() {
+        Member member = new Member();
+        member.setNickname(nicknameTb.getText().toString());
+        member.setPassword(passwordTb.getText().toString());
+
+        return member;
     }
 
     private void showDialog() {
         dialog.setTitle("Loading");
         dialog.setMessage("Waiting while Loading...");
         dialog.show();
+    }
+
+    private void clearFields() {
+
+        nicknameTb.setText("");
+        passwordTb.setText("");
     }
 
     public class LoginCallback extends HttpRequestCallback<HttpResult<Member>> {
@@ -92,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
-
     }
 
 
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (result.isSuceeded()) {
                 Toast.makeText(getApplicationContext(), "Registrierung erfolgreich. Bitte loggen Sie sich ein.", Toast.LENGTH_LONG).show();
+                clearFields();
             } else {
                 Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_LONG).show();
             }

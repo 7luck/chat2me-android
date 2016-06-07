@@ -2,8 +2,8 @@ package io.sevenluck.client.chat2me.client;
 
 import android.util.Log;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,16 +12,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
+
 import java.io.IOException;
+
 import io.sevenluck.client.chat2me.auth.TokenAuthentication;
 import io.sevenluck.client.chat2me.common.AppConstants;
 
 /**
  * Created by loki on 6/7/16.
  */
-public class RestClient<T> {
+public abstract class RestClient<T> {
 
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    public RestClient() {
+    }
 
 
     public HttpResult<T> send(String url, HttpMethod method, T data) {
@@ -48,7 +53,7 @@ public class RestClient<T> {
                 RestException error = objectMapper.readValue(responseBody, RestException.class);
                 return new HttpResult<>(error.getMessage());
             } else {
-                T result = objectMapper.readValue(responseBody, new TypeReference<T>() {});
+                T result = objectMapper.readValue(responseBody, getTClass());
                 Log.d("POST", result.toString());
                 return new HttpResult<>(result);
             }
@@ -57,6 +62,7 @@ public class RestClient<T> {
         }
     }
 
+    public abstract Class<T> getTClass();
 
 
 
