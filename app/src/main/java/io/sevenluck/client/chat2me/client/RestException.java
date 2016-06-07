@@ -1,4 +1,4 @@
-package io.sevenluck.client.chat2me.domain;
+package io.sevenluck.client.chat2me.client;
 
 import java.io.Serializable;
 

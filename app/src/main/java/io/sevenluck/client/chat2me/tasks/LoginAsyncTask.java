@@ -16,12 +16,12 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
-import io.sevenluck.client.chat2me.common.AndroidErrorResponseHandler;
+import io.sevenluck.client.chat2me.client.AndroidErrorResponseHandler;
 import io.sevenluck.client.chat2me.common.AppConstants;
-import io.sevenluck.client.chat2me.common.RestUtil;
-import io.sevenluck.client.chat2me.domain.HttpResult;
+import io.sevenluck.client.chat2me.client.RestUtil;
+import io.sevenluck.client.chat2me.client.HttpResult;
 import io.sevenluck.client.chat2me.domain.Member;
-import io.sevenluck.client.chat2me.domain.RestException;
+import io.sevenluck.client.chat2me.client.RestException;
 import io.sevenluck.client.chat2me.tasks.callbacks.HttpRequestCallback;
 
 /**

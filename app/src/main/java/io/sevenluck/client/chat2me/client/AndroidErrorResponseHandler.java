@@ -1,12 +1,9 @@
-package io.sevenluck.client.chat2me.common;
-
-import android.util.Log;
+package io.sevenluck.client.chat2me.client;
 
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
 
 import java.io.IOException;
-
 
 
 /**

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import io.sevenluck.client.chat2me.domain.HttpResult;
+import io.sevenluck.client.chat2me.client.HttpResult;
 import io.sevenluck.client.chat2me.domain.Member;
 import io.sevenluck.client.chat2me.tasks.LoginAsyncTask;
 import io.sevenluck.client.chat2me.tasks.RegisterAsyncTask;

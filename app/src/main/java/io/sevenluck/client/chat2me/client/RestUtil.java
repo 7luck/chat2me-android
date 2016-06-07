@@ -1,4 +1,4 @@
-package io.sevenluck.client.chat2me.common;
+package io.sevenluck.client.chat2me.client;
 
 import org.springframework.http.HttpStatus;
 
