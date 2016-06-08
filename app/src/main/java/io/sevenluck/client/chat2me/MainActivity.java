@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import io.sevenluck.client.chat2me.activity.TabActivity;
 import io.sevenluck.client.chat2me.client.HttpResult;
 import io.sevenluck.client.chat2me.domain.Member;
 import io.sevenluck.client.chat2me.tasks.LoginAsyncTask;
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearFields() {
-
         nicknameTb.setText("");
         passwordTb.setText("");
     }
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.dismiss();
 
             if (result.isSuceeded()) {
-                Intent intent = new Intent(MainActivity.this, MyTab.class);
+                Intent intent = new Intent(MainActivity.this, TabActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_LONG).show();
