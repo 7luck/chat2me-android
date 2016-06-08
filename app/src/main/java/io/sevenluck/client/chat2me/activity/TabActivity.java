@@ -38,12 +38,18 @@ public class TabActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_chat_black_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_people_black_24dp);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_settings_black_24dp);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new ChatRoomListFragment(), getResources().getString(R.string.tab_chatrooms));
+        adapter.addFragment(new ChatRoomListFragment(), "");
+        adapter.addFragment(new ChatRoomListFragment(), "");
+        adapter.addFragment(new ChatRoomListFragment(), "");
         viewPager.setAdapter(adapter);
     }
 
