@@ -1,6 +1,7 @@
 package io.sevenluck.client.chat2me.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,20 @@ public class ChatRoomListFragment extends ListFragment implements AdapterView.On
 
     public ChatRoomListFragment() {}
 
+    private FloatingActionButton addChatBtn;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chatroom, container, false);
+
+        addChatBtn = (FloatingActionButton) view.findViewById(R.id.addChatBtn);
+        addChatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
     }
 
