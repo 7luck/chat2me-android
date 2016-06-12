@@ -32,17 +32,17 @@ public class ChatRoomListFragment extends ListFragment implements AdapterView.On
         addChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hos();
+                showDialog();
             }
         });
 
         return view;
     }
 
-    public void hos(){
+    public void showDialog(){
         FragmentManager fm = getFragmentManager();
-        AddChatDialog editNameDialogFragment = AddChatDialog.newInstance("Some Title");
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        AddChatDialog addChatDialog = new AddChatDialog();
+        addChatDialog.show(fm, "addchatdialog");
     }
 
     @Override
