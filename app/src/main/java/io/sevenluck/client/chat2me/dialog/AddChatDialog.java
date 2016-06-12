@@ -26,7 +26,7 @@ public class AddChatDialog extends DialogFragment {
 
 
     public interface NoticeDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
+        void onDialogPositiveClick(DialogFragment dialog);
     }
 
 
