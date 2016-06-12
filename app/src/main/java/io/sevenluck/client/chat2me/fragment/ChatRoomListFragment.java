@@ -2,6 +2,7 @@ package io.sevenluck.client.chat2me.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import io.sevenluck.client.chat2me.R;
+import io.sevenluck.client.chat2me.dialog.AddChatDialog;
 
 import static android.R.layout.simple_list_item_1;
 
@@ -30,11 +32,17 @@ public class ChatRoomListFragment extends ListFragment implements AdapterView.On
         addChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                hos();
             }
         });
 
         return view;
+    }
+
+    public void hos(){
+        FragmentManager fm = getFragmentManager();
+        AddChatDialog editNameDialogFragment = AddChatDialog.newInstance("Some Title");
+        editNameDialogFragment.show(fm, "fragment_edit_name");
     }
 
     @Override
