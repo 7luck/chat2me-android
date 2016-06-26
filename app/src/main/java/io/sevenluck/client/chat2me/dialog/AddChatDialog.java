@@ -1,6 +1,5 @@
 package io.sevenluck.client.chat2me.dialog;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -12,7 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import io.sevenluck.client.chat2me.R;
 import io.sevenluck.client.chat2me.client.HttpResult;
-import io.sevenluck.client.chat2me.domain.Chat;
+import io.sevenluck.client.chat2me.domain.ChatTo;
 import io.sevenluck.client.chat2me.tasks.AddChatAsyncTask;
 import io.sevenluck.client.chat2me.tasks.callbacks.HttpRequestCallback;
 
@@ -44,10 +43,10 @@ public class AddChatDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
 
                         String chatName = chatTb.getText().toString();
-                        Chat newChat = Chat.getInstance(chatName);
+                        ChatTo newChatTo = ChatTo.getInstance(chatName);
                         AddChatAsyncTask addChatTask = new AddChatAsyncTask(AddChatDialog.this.getContext() , new AddChatCallback());
                         try {
-                            addChatTask.execute(newChat);
+                            addChatTask.execute(newChatTo);
                         } catch (Exception e) {
                             Log.e("AddChatDialog", e.getMessage(), e);
                         }
@@ -65,10 +64,10 @@ public class AddChatDialog extends DialogFragment {
         this.mListener = mListener;
     }
 
-    public class AddChatCallback extends HttpRequestCallback<HttpResult<Chat>> {
+    public class AddChatCallback extends HttpRequestCallback<HttpResult<ChatTo>> {
 
         @Override
-        public void onFishedRequest(HttpResult<Chat> result) {
+        public void onFishedRequest(HttpResult<ChatTo> result) {
 
             if (result.isSuceeded()) {
                 mListener.onDialogPositiveClick(AddChatDialog.this);

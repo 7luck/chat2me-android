@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import io.sevenluck.client.chat2me.activity.TabActivity;
 import io.sevenluck.client.chat2me.client.HttpResult;
-import io.sevenluck.client.chat2me.domain.Member;
+import io.sevenluck.client.chat2me.domain.MemberTo;
 import io.sevenluck.client.chat2me.tasks.LoginAsyncTask;
 import io.sevenluck.client.chat2me.tasks.RegisterAsyncTask;
 import io.sevenluck.client.chat2me.tasks.callbacks.HttpRequestCallback;
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private Member getMember() {
-        Member member = new Member();
+    private MemberTo getMember() {
+        MemberTo member = new MemberTo();
         member.setNickname(nicknameTb.getText().toString());
         member.setPassword(passwordTb.getText().toString());
 
@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity {
         passwordTb.setText("");
     }
 
-    public class LoginCallback extends HttpRequestCallback<HttpResult<Member>> {
+    public class LoginCallback extends HttpRequestCallback<HttpResult<MemberTo>> {
 
         @Override
-        public void onFishedRequest(HttpResult<Member> result) {
+        public void onFishedRequest(HttpResult<MemberTo> result) {
             loginBtn.setEnabled(true);
             dialog.dismiss();
 
@@ -98,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public class RegistrationCallback extends HttpRequestCallback<HttpResult<Member>> {
+    public class RegistrationCallback extends HttpRequestCallback<HttpResult<MemberTo>> {
 
         @Override
-        public void onFishedRequest(HttpResult<Member> result) {
+        public void onFishedRequest(HttpResult<MemberTo> result) {
             registerBtn.setEnabled(true);
             dialog.dismiss();
             if (null == result) {

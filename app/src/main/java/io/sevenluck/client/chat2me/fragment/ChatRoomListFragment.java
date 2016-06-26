@@ -65,7 +65,7 @@ public class ChatRoomListFragment extends ListFragment implements AdapterView.On
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        Toast.makeText(getContext().getApplicationContext(), "Chat angelegt.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext().getApplicationContext(), "ChatTo angelegt.", Toast.LENGTH_LONG).show();
         mAddChatDialog.dismiss();
     }
 

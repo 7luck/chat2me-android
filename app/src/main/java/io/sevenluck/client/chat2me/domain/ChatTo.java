@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by loki on 6/12/16.
  */
-public class Chat implements Serializable {
+public class ChatTo implements Serializable {
 
     private Long id;
     private String name;
@@ -13,16 +13,16 @@ public class Chat implements Serializable {
     private String password;
     private boolean publicChat;
 
-    public Chat() {
+    public ChatTo() {
         this.publicChat = false;
         this.password = null;
     }
 
-    public static Chat getInstance(String name) {
-        Chat chat = new Chat();
-        chat.setName(name);
+    public static ChatTo getInstance(String name) {
+        ChatTo chatTo = new ChatTo();
+        chatTo.setName(name);
 
-        return chat;
+        return chatTo;
     }
 
     public String getName() {

@@ -10,11 +10,11 @@ import org.springframework.http.HttpMethod;
 import io.sevenluck.client.chat2me.client.HttpResult;
 import io.sevenluck.client.chat2me.client.RestClient;
 import io.sevenluck.client.chat2me.common.AppConstants;
-import io.sevenluck.client.chat2me.domain.Chat;
+import io.sevenluck.client.chat2me.domain.ChatTo;
 import io.sevenluck.client.chat2me.tasks.callbacks.BasicAsyncTask;
 import io.sevenluck.client.chat2me.tasks.callbacks.HttpRequestCallback;
 
-public class AddChatAsyncTask extends BasicAsyncTask<Chat, Void, HttpResult<Chat>> {
+public class AddChatAsyncTask extends BasicAsyncTask<ChatTo, Void, HttpResult<ChatTo>> {
 
     public final static String REST_ENDPOINT = AppConstants.URL + "/chatrooms";
 
@@ -23,17 +23,17 @@ public class AddChatAsyncTask extends BasicAsyncTask<Chat, Void, HttpResult<Chat
     }
 
     @Override
-    protected HttpResult<Chat> doInBackground(Chat... params) {
+    protected HttpResult<ChatTo> doInBackground(ChatTo... params) {
         try {
-            Chat chat = params[0];
-            RestClient<Chat> client = new RestClient<Chat>() {
+            ChatTo chatTo = params[0];
+            RestClient<ChatTo> client = new RestClient<ChatTo>() {
                 @Override
-                public Class<Chat> getTClass() {
-                    return Chat.class;
+                public Class<ChatTo> getTClass() {
+                    return ChatTo.class;
                 }
             };
 
-            return client.send(REST_ENDPOINT, HttpMethod.POST, chat);
+            return client.send(REST_ENDPOINT, HttpMethod.POST, chatTo);
         } catch (Exception e) {
             Log.e("AddChatAsyncTask", e.getMessage(), e);
         }
