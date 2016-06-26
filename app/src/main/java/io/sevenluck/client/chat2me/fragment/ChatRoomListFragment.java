@@ -5,14 +5,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import io.sevenluck.client.chat2me.R;
+import io.sevenluck.client.chat2me.data.Chat2MeDataHelper;
+import io.sevenluck.client.chat2me.data.ChatAdapter;
 import io.sevenluck.client.chat2me.dialog.AddChatDialog;
 
 import static android.R.layout.simple_list_item_1;
@@ -26,6 +30,9 @@ public class ChatRoomListFragment extends ListFragment implements AdapterView.On
 
     private FloatingActionButton mAddChatBtn;
     private AddChatDialog mAddChatDialog;
+    private Chat2MeDataHelper mChatStorage;
+    private ChatAdapter mAdapter;
+    private ListView mListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,10 +46,11 @@ public class ChatRoomListFragment extends ListFragment implements AdapterView.On
             }
         });
 
+
         return view;
     }
 
-    public void showDialog(){
+    public void showDialog() {
         FragmentManager fm = getFragmentManager();
         mAddChatDialog = new AddChatDialog();
         mAddChatDialog.setNoticeListener(this);
@@ -53,8 +61,10 @@ public class ChatRoomListFragment extends ListFragment implements AdapterView.On
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayAdapter adapter = new ArrayAdapter<>(getActivity(), simple_list_item_1, new String[] {"1", "2"});
-        setListAdapter(adapter);
+        mChatStorage = new Chat2MeDataHelper(this.getContext());
+        mAdapter = new ChatAdapter(this.getContext(), mChatStorage.getChatCursor());
+
+        setListAdapter(mAdapter);
         getListView().setOnItemClickListener(this);
     }
 
@@ -65,7 +75,11 @@ public class ChatRoomListFragment extends ListFragment implements AdapterView.On
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        Toast.makeText(getContext().getApplicationContext(), "ChatTo angelegt.", Toast.LENGTH_LONG).show();
+
+        mAdapter.getCursor().requery();
+        mAdapter.notifyDataSetChanged();
+
+        Toast.makeText(getContext().getApplicationContext(), "Chat erfolgreich hinzugefuegt.", Toast.LENGTH_LONG).show();
         mAddChatDialog.dismiss();
     }
 

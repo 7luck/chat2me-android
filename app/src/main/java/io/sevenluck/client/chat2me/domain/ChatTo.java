@@ -1,6 +1,7 @@
 package io.sevenluck.client.chat2me.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by loki on 6/12/16.
@@ -12,15 +13,25 @@ public class ChatTo implements Serializable {
     private String description;
     private String password;
     private boolean publicChat;
+    private Date inserted;
 
     public ChatTo() {
         this.publicChat = false;
         this.password = null;
     }
 
+    public Date getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(Date inserted) {
+        this.inserted = inserted;
+    }
+
     public static ChatTo getInstance(String name) {
         ChatTo chatTo = new ChatTo();
         chatTo.setName(name);
+
 
         return chatTo;
     }
@@ -64,4 +75,6 @@ public class ChatTo implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }

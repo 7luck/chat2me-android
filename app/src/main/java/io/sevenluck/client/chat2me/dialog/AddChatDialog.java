@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import io.sevenluck.client.chat2me.R;
 import io.sevenluck.client.chat2me.client.HttpResult;
+import io.sevenluck.client.chat2me.data.Chat;
+import io.sevenluck.client.chat2me.data.Chat2MeDataHelper;
 import io.sevenluck.client.chat2me.domain.ChatTo;
 import io.sevenluck.client.chat2me.tasks.AddChatAsyncTask;
 import io.sevenluck.client.chat2me.tasks.callbacks.HttpRequestCallback;
@@ -22,6 +24,7 @@ public class AddChatDialog extends DialogFragment {
 
     private EditText chatTb;
     private NoticeDialogListener mListener;
+    private Chat2MeDataHelper mChatStorage;
 
 
     public interface NoticeDialogListener {
@@ -31,6 +34,7 @@ public class AddChatDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        mChatStorage = new Chat2MeDataHelper(this.getContext());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
@@ -70,6 +74,9 @@ public class AddChatDialog extends DialogFragment {
         public void onFishedRequest(HttpResult<ChatTo> result) {
 
             if (result.isSuceeded()) {
+
+                ChatTo newChat = result.getData();
+                mChatStorage.addChat(new Chat(newChat.getName(), newChat.getInserted(), newChat.getId()));
                 mListener.onDialogPositiveClick(AddChatDialog.this);
             }
 

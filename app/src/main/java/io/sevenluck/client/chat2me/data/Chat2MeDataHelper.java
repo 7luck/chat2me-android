@@ -59,8 +59,14 @@ public class Chat2MeDataHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor getChatCursor() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + ChatEntity.TABLE_NAME, null);
+    }
+
     public List<Chat> getChats() {
         SQLiteDatabase db = this.getReadableDatabase();
+
         try {
             Cursor cursor = db.rawQuery("SELECT * FROM " + ChatEntity.TABLE_NAME, null);
 

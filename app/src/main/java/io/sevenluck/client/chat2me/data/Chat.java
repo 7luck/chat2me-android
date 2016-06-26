@@ -16,6 +16,12 @@ public class Chat implements Serializable {
     public Chat() {
     }
 
+    public Chat(String name, Date created, Long entityId) {
+        this.name = name;
+        this.created = created;
+        this.entityId = entityId;
+    }
+
     public Long getId() {
         return id;
     }
