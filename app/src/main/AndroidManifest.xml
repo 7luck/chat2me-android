@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MyTab">
-
         </activity>
+        <activity android:name=".activity.TabActivity"></activity>
     </application>
 
 </manifest>
